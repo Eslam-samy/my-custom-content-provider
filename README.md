@@ -1,28 +1,35 @@
+# Notes Content Provider & Resolver
+
+This repository showcases an Android **ContentProvider** and a corresponding **ContentResolver** for managing and sharing notes data securely between applications.
 
 ---
 
-### **README.md for ContentResolver Project**
+## 📌 Overview
 
-```markdown
-# Notes Content Resolver
+### Notes Content Provider
+- Implements a `ContentProvider` using the Room database.
+- Secures access via a custom-defined permission.
+- Supports CRUD operations:
+  - **Query**: Retrieve all or specific notes.
+  - **Insert**: Add new notes.
+  - **Update**: Modify existing notes.
+  - **Delete**: Remove notes.
 
-This project demonstrates how to interact with a **ContentProvider** to perform `CRUD` operations on notes data shared between apps.
+### Notes Content Resolver
+- Demonstrates interaction with the `ContentProvider` to:
+  - Query, insert, update, and delete notes.
+  - Observe changes in the data via `ContentObserver`.
 
-## Features
-- Interacts with `NotesContentProvider` to:
-  - Query all notes.
-  - Add a new note.
-  - Update existing notes.
-  - Delete a note.
-- Observes changes in the `ContentProvider` using `ContentObserver`.
+---
 
-## Setup
+## ⚙️ Setup
 
-### 1. Manifest Configuration
-Ensure the following permissions and queries are declared in the manifest:
-```xml
-<uses-permission android:name="com.degel.my_custom_content_provider.READ_NOTES" />
-
-<queries>
-    <provider android:authorities="com.degel.my_custom_content_provider.provider" />
-</queries>
+### 1. Content Provider Setup
+- Add the `NotesContentProvider` to your `AndroidManifest.xml`:
+  ```xml
+  <provider
+      android:name=".data.provider.NotesContentProvider"
+      android:authorities="com.degel.my_custom_content_provider.provider"
+      android:exported="true"
+      android:permission="com.degel.my_custom_content_provider.READ_NOTES"
+      android:readPermission="com.degel.my_custom_content_provider.READ_NOTES" />
